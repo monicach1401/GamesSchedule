@@ -46,11 +46,11 @@ export const ScheduleTable = () => {
       selector: row => row.games.time
     },
     {
-      name: 'DATE',
+      name: 'TEAMS',
       selector: row => row.games.teams
     },
     {
-      name: 'DATE',
+      name: 'LOCATION',
       selector: row => row.games.location_key
     }
   ]

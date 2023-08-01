@@ -1,39 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Navigation } from './Navigation';
 import DataTable from 'react-data-table-component';
-import 'styled-components'
-
-
-
-
-
-//4- mostrar datos en datatable
-
+import { Link } from 'react-router-dom';
+import { Navigation } from './Navigation';
 
 export const ScheduleTable = () => {
-  //1.configurar hooks
-  const [games, setGames] = useState([])
-  //2.función para mostrar datos con fetch
-  const file = "games.json"
+
+  // -------------   Obtenemos los datos con fetch del fichero JSON
+  const [data, setData] = useState([])
   const showData = async () => {
-    const response = await fetch(file)
-    const data = await response.json()
-
-    const resultArray = Object.keys(data.games).map((id) => ({
+    const response = await fetch("games.json")
+    const result = await response.json()
+    //------ convierto el Json en un array
+    const dataConvertToArray = Object.keys(result.games).map((id) => ({
       id,
-      games: data.games[id],
-      locations: data.locations,
+      games: result.games[id],
+      locations: result.locations,
     }));
-
-    setGames(resultArray)
-  
+    //--------------
+    setData(dataConvertToArray)
   }
   useEffect(() => {
     showData()
   }, [])
-
-
-
+  //------------------------------------------------------------------
+  //console.log(data)
+  //const location_key=data[0].games.location_key
+  //console.log ('el location key es',data[0].games.location_key)
+  //const location_name=data[0].locations[location_key].name
+  //console.log('nombre del campo : ', location_name)
+  
 
   //3- configuramos columnas
   const columns = [
@@ -51,21 +46,34 @@ export const ScheduleTable = () => {
     },
     {
       name: 'LOCATION',
-      selector: row => row.games.location_key
-    }
+      cell: row => (
+        <Link to={`/games/${row.id}`} state={{ game: row.games }}>
+          {row.games.location_key}
+        </Link>
+      ),
+    },
   ]
+ 
+  // PATHNAME: especifica la ubicación a la que se navegará cuando se haga clic en el enlace.
+  // tenemos que ir a "/games/:id" por lo tanto tenemos que construir asi la URL
+  // la variable row.id corresponde al id del objeto en la fila de la tabla.
+  // si row.id es "2023_09_01_01", la URL sería "/games/2023_09_01_01".*/}
+  // STATE: Se utiliza para pasar datos adicionales al componente de destino.
+  // Aqui tenemos que pasar los datos del juego (row.games) .
+  // state permite que el componente de destino acceda a los datos enviados desde el componente de origen.
+  // En el componente destino para acceder a estos datos , tendremos que utilizar useLocation
 
   //4- mostramos la data en DataTable
   return (
     <>
-      <Navigation />
-      <h1> Estoy en la pantalla de Horarios</h1>
+      <Navigation/>
+      <h1 style={{marginTop:'19%'}}> </h1>
       <DataTable
         columns={columns}
-        data={games}
+        data={data}
         pagination
+        highlightOnHover
       />
-
     </>
   )
 }

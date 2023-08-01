@@ -1,25 +1,25 @@
-import React from 'react';
+
 import './App.css';
 import './index.css';
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from './components/Home';
-import {ScheduleTable} from './components/ScheduleTable';
-
+import { ScheduleTable } from './components/ScheduleTable';
+import { DetailsGame } from './components/DetailsGame';
 
 
 function App() {
   return (
-    <div className="App">
-      <>
+    <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <Home /> } />
-          <Route path="/schedule" element={ <ScheduleTable /> } />
+          <Route path="/" element={<Home />} />
+          <Route path="/schedule" element={<ScheduleTable />} />
+          <Route path="/games/:id" element={<DetailsGame />} />
         </Routes>
       </BrowserRouter>
-      </>
-    </div>
+    </>
+
   );
 }
- 
+
 export default App;

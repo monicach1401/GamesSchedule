@@ -139,12 +139,12 @@
       "North": {
         "name": "North Elementary",
         "address": "1409 N. Ogden Ave., Chicago, IL 60610",
-        "map_url": "https://goo.gl/maps/6Laj2hacsfFLQgBk9"
+        "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.355893382735!2d-87.6480479234786!3d41.90670746362178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33a674ca85d%3A0x9940c7163c4950c5!2s1409%20N%20Ogden%20Ave%2C%20Chicago%2C%20IL%2060610%2C%20EE.%20UU.!5e0!3m2!1ses!2ses!4v1690891879236!5m2!1ses!2ses"
       },
       "South": {
         "name": "South Elementary",
         "address": "2101 N. Fremont St., Chicago, IL 60614",
-        "map_url": "https://goo.gl/maps/GrQBRfT9Y3rGJaqk8"
+        "map_url": "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2968.6090036643554!2d-87.64824367359245!3d41.92276333784808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s2101%20N.%20Fremont%20St.%2C%20Chicago%2C%20IL%20606140!5e0!3m2!1ses!2ses!4v1690891953594!5m2!1ses!2ses"
       }
     }
 }

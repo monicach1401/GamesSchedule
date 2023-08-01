@@ -6,7 +6,7 @@ import { Navigation } from './Navigation';
 export const Home = () => {
   return (
     <>
-      <h1 style={{marginTop:'18%'}}></h1>
+      <h1 style={{marginTop:'16%'}}></h1>
       <Navigation />
       <div className="card " >
         <img src={design1_image1} alt="..."></img>

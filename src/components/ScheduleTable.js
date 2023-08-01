@@ -3,12 +3,15 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
+import { generatePath } from 'react-router-dom';
 
 export const ScheduleTable = () => {
 
   //-- lo utilizaremos para vover a la página anterior
   const navigate = useNavigate();
   const goBack = () => navigate('/');
+ 
+
 
   // -------------   Obtenemos los datos con fetch del fichero JSON
   const [data, setData] = useState([])
@@ -35,7 +38,16 @@ export const ScheduleTable = () => {
   //console.log(loc)
   //console.log('su url es',data[1].locations[loc].map_url)
 
-
+  //-- lo utilizaremos para cuando hagamos click en una Fila
+  const goDetailsGame = (row) => {
+    console.log('Fila seleccionada:', row);
+     // Genera la ruta con el parámetro row.id
+     const path = generatePath(`/games/:id`, { id: row.id });
+     // Guarda el estado en localStorage
+     localStorage.setItem('gameState', JSON.stringify(row.games));
+     // Redirige a la página DetailsGame
+     window.location.href = path;
+  };
 
   //3- configuramos columnas
   const columns = [
@@ -52,18 +64,18 @@ export const ScheduleTable = () => {
       name: 'TEAMS',
       selector: row => row.games.teams
     },
-    //{
-    //  name: 'LOCATION',
-    //  selector: row => row.games.location_key
-    //},
-     {
-       name: 'LOCATION',
-       cell: row => (
-         <Link to={`/games/${row.id}`} state={{ game: row.games }}>
-           {row.games.location_key}
-         </Link>
-      ),
+    {
+      name: 'LOCATION',
+      selector: row => row.games.location_key
     },
+    //{
+    //name: 'LOCATION',
+    // cell: row => (
+    //  <Link to={`/games/${row.id}`} state={{ game: row.games }}>
+    //    {row.games.location_key}
+    //  </Link>
+    // ),
+
   ]
 
   // PATHNAME: especifica la ubicación a la que se navegará cuando se haga clic en el enlace.
@@ -85,6 +97,7 @@ export const ScheduleTable = () => {
         data={data}
         pagination
         highlightOnHover
+        onRowClicked={goDetailsGame}
       />
       <button onClick={goBack}>Go Back</button>
     </>

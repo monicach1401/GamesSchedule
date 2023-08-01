@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 
-export const DetailsGame = ({ history }) => {
+export const DetailsGame = () => {
   //-- lo utilizaremos para vover a la página anterior
   const navigate = useNavigate();
   const goBack = () => navigate('/schedule');
@@ -42,56 +42,57 @@ export const DetailsGame = ({ history }) => {
       "map_url": "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2968.6090036643554!2d-87.64824367359245!3d41.92276333784808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s2101%20N.%20Fremont%20St.%2C%20Chicago%2C%20IL%20606140!5e0!3m2!1ses!2ses!4v1690891953594!5m2!1ses!2ses"
     }
   };
+  // utilizamos el useState para guardar los datos de game y  la URL del mapa ya que un UseEffect no puede hacer el return
+  const [gameState, setGameState] = useState(null);
+  const [mapUrl, setMapUrl] = useState('');
 
-  // el Params obtenemos el id
-  const id = useParams();
-  console.log('el id es:', id)
+  useEffect(() => {
+    // Accede al estado almacenado en localStorage
+    const gameStateFromLocalStorage = JSON.parse(localStorage.getItem('gameState'));
+    console.log('Estado almacenado:', gameStateFromLocalStorage);
+    // Guarda el estado en el estado local del componente
+    setGameState(gameStateFromLocalStorage);
 
-  // con location obtenemos los datos que nos pasan del componente ScheduleTable
-  const location = useLocation();
-  console.log('en location es ', location)
+    // Obtiene la URL del mapa utilizando locationsData y el location_key del gameState
+    const locationKey = gameStateFromLocalStorage.location_key;
+    const mapUrlFromLocationsData = locationsData[locationKey]?.map_url || '';
 
-  // Ponemos los valores del state.game en nuestra variable
-  const detailsGame = location.state?.game;
-
-  console.log(' el location key es', detailsGame.location_key)
-
-  console.log(locationsData[detailsGame.location_key].map_url)
-  // tenemos que convertir este valor en un string para que lo podamos guardar en esta variable
-  const map_url = locationsData[detailsGame.location_key].map_url.toString();
-
-  // controlamos errores
-  if (!detailsGame) {
-    return (
-      <h1>Error</h1>
-    );
-  }
+    // Guarda la URL del mapa en el estado local del componente
+    setMapUrl(mapUrlFromLocationsData);
+    // Limpia el estado almacenado en localStorage después de utilizarlo
+    //localStorage.removeItem('gameState');
+  }, []);
 
   return (
     <>
       <Navigation />
-      <div className="card " style={{ marginTop: '19%' }}>
-        <div className="card-body">
-          <h6 className="card-title">DETAILS GAME INFORMATION</h6>
-          <p className="card-text">Date :  {detailsGame.date}</p>
-          <p className="card-text">Time : {detailsGame.time}</p>
-          <p className="card-text">Teams : {detailsGame.teams}</p>
-          <p className="card-text">Name : {locationsData[detailsGame.location_key].name}</p>
-          <p className="card-text">Adress : {locationsData[detailsGame.location_key].address}</p>
-          <iframe
-            src={map_url}
-            width="330"
-            height="340"
-            style={{ border: '0' }}
-            allowFullscreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade">
-          </iframe>
+      {gameState && (
+        <div className="card" style={{ marginTop: '19%' }}>
+          <div className="card-body">
+            <h6 className="card-title">DETAILS GAME INFORMATION</h6>
+            <p className="card-text">Date : {gameState.date}</p>
+            <p className="card-text">Time : {gameState.time}</p>
+            <p className="card-text">Teams : {gameState.teams}</p>
+            <p className="card-text">Name : {locationsData[gameState.location_key].name}</p>
+            <p className="card-text">Address : {locationsData[gameState.location_key].address}</p>
+            {mapUrl && (
+              <iframe
+                src={mapUrl}
+                width="330"
+                height="340"
+                style={{ border: '0' }}
+                allowFullscreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
       <button onClick={goBack}>Go Back</button>
     </>
-  )
+  );
 };
+
 
 

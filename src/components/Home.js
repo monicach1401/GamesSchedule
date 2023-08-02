@@ -2,11 +2,27 @@
 import design1_image1 from '../assets/img/design1_image1.jpg';
 import home_image2 from '../assets/img/home_image2.jpg'
 import { Navigation } from './Navigation';
+import { signInWithGoogle, signOut,useUserState } from '../utilites/firebase';
 
 export const Home = () => {
+
+  const SignInButton = () => (
+    <button className="Mybutton"
+      onClick={() => signInWithGoogle()}>
+      Sign In
+    </button>
+  );
+
+  const SignOutButton = () => (
+    <button className="Mybutton"
+      onClick={() => signOut()}>
+      Sign Out
+    </button>
+  );
+  const [user] = useUserState();
   return (
     <>
-      <h1 style={{marginTop:'16%'}}></h1>
+      <h1 style={{ marginTop: '16%' }}></h1>
       <Navigation />
       <div className="card " >
         <img src={design1_image1} alt="..."></img>
@@ -20,8 +36,9 @@ export const Home = () => {
           <h1 className="card-text">  </h1>
         </div>
       </div>
-
+      { user ? <SignOutButton /> : <SignInButton /> }
     </>
+
   )
 }
 

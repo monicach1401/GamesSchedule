@@ -6,7 +6,6 @@ import { Home } from './components/Home';
 import { ScheduleTable } from './components/ScheduleTable';
 import { DetailsGame } from './components/DetailsGame';
 
-
 function App() {
   return (
     <>

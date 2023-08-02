@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import { Link } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
@@ -33,18 +32,14 @@ export const ScheduleTable = () => {
   }, [])
   //------------------------------------------------------------------
 
-  //console.log('esto es la data',data)
-  //const loc=data[1].games.location_key
-  //console.log(loc)
-  //console.log('su url es',data[1].locations[loc].map_url)
-
-  //-- lo utilizaremos para cuando hagamos click en una Fila
+  // función que nos guarda los datos de la fila para pasarlos al componente DetailsGame
   const goDetailsGame = (row) => {
     console.log('Fila seleccionada:', row);
      // Genera la ruta con el parámetro row.id
      const path = generatePath(`/games/:id`, { id: row.id });
      // Guarda el estado en localStorage
-     localStorage.setItem('gameState', JSON.stringify(row.games));
+     localStorage.setItem('gameState', JSON.stringify(row.games));// Guarda los datos de games
+     localStorage.setItem('locationState', JSON.stringify(row.locations)); // Guarda los datos de locations
      // Redirige a la página DetailsGame
      window.location.href = path;
   };
@@ -68,25 +63,10 @@ export const ScheduleTable = () => {
       name: 'LOCATION',
       selector: row => row.games.location_key
     },
-    //{
-    //name: 'LOCATION',
-    // cell: row => (
-    //  <Link to={`/games/${row.id}`} state={{ game: row.games }}>
-    //    {row.games.location_key}
-    //  </Link>
-    // ),
-
+   
   ]
 
-  // PATHNAME: especifica la ubicación a la que se navegará cuando se haga clic en el enlace.
-  // tenemos que ir a "/games/:id" por lo tanto tenemos que construir asi la URL
-  // la variable row.id corresponde al id del objeto en la fila de la tabla.
-  // si row.id es "2023_09_01_01", la URL sería "/games/2023_09_01_01".*/}
-  // STATE: Se utiliza para pasar datos adicionales al componente de destino.
-  // Aqui tenemos que pasar los datos del juego (row.games) .
-  // state permite que el componente de destino acceda a los datos enviados desde el componente de origen.
-  // En el componente destino para acceder a estos datos , tendremos que utilizar useLocation
-
+ 
   //4- mostramos la data en DataTable
   return (
     <>
@@ -97,9 +77,11 @@ export const ScheduleTable = () => {
         data={data}
         pagination
         highlightOnHover
-        onRowClicked={goDetailsGame}
+        onRowClicked={ goDetailsGame } // al hacer click en una fila mostramos DetailsGame
       />
-      <button onClick={goBack}>Go Back</button>
+       {/* Elemento vacío para ocupar espacio */}
+       <div style={{ width: '10px', height: '20px' }} />
+      <button className="Mybutton" onClick={goBack}>Go Back</button>
     </>
   )
 }

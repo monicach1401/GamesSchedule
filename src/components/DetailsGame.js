@@ -6,8 +6,12 @@ import { useNavigate } from 'react-router-dom';
 export const DetailsGame = () => {
   //-- lo utilizaremos para vover a la página anterior
   const navigate = useNavigate();
-  const goBack = () => navigate('/schedule');
-  const goHome = () => navigate('/');
+
+  const goBack = () => {
+    
+    navigate('/schedule');
+  }
+
 
 
   // utilizamos el useState para guardar los datos de game y  la URL del mapa ya que un UseEffect no puede hacer el return
@@ -58,12 +62,11 @@ export const DetailsGame = () => {
         {/* Elemento vacío para ocupar espacio */}
         <div style={{ width: '10px', height: '20px' }} />
 
-        <button onClick={goBack}>Go Back - Schedule Table </button>
+        <button className="Mybutton"onClick={goBack}> Go Back </button>
         {/* Elemento vacío para ocupar espacio */}
         <div style={{ width: '10px', height: '20px' }} />
 
-        {/* Botón 2 */}
-        <button onClick={goHome}>Go Home</button>
+       
       </div>
 
     </>

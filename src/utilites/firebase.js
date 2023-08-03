@@ -26,4 +26,6 @@ const firebaseSignOut = () => signOut(getAuth(firebase));
 export { firebaseSignOut as signOut };
 
 export const useUserState = () => useAuthState(getAuth(firebase));
-
+//export const useUserState = useAuthState(firebase.auth()); si pongo esto según documentación da error
+//Line 29:29:  React Hook "useAuthState" cannot be called at the top level.
+//React Hooks must be called in a React function component or a custom React Hook function  react-hooks/rules-of-hooks

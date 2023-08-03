@@ -1,25 +1,29 @@
-
+import React from "react";
 import design1_image1 from '../assets/img/design1_image1.jpg';
 import home_image2 from '../assets/img/home_image2.jpg'
 import { Navigation } from './Navigation';
-import { signInWithGoogle, signOut,useUserState } from '../utilites/firebase';
+import { signInWithGoogle, signOut,useUserState } from '../utilites/firebase'; 
+
 
 export const Home = () => {
 
   const SignInButton = () => (
     <button className="Mybutton"
       onClick={() => signInWithGoogle()}>
-      Sign In
+      Login
     </button>
   );
 
   const SignOutButton = () => (
     <button className="Mybutton"
       onClick={() => signOut()}>
-      Sign Out
+      Logout
     </button>
   );
-  const [user] = useUserState();
+
+ const [user] = useUserState(); 
+
+ 
   return (
     <>
       <h1 style={{ marginTop: '16%' }}></h1>
@@ -36,7 +40,8 @@ export const Home = () => {
           <h1 className="card-text">  </h1>
         </div>
       </div>
-      { user ? <SignOutButton /> : <SignInButton /> }
+      {user ? <SignOutButton /> : <SignInButton />}
+      
     </>
 
   )

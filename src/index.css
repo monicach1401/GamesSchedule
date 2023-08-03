@@ -22,42 +22,58 @@ s code {
 }
 
 .Mybutton {
-  background-color:dimgrey;
+  background-color:green;
   color: white;
-  padding: 20px 40px;
+  padding: 10px 50px;
   border: none;
   border-radius: 5px;
-  margin-left: 35%;
+  margin-left: 30%;
   font-weight:700;
- 
-}
+  margin-top:15%;
+  font-size: x-large;
+ }
+
 
 .tableSchedule {
   background-color: gray;
 }
 
-.map-responsive {
 
-  overflow: hidden;
+/* Message Screen*/
 
-  padding-bottom: 56.25%;
-
-  position: relative;
-
-  height: 0;
-
+.textOfMessage,
+.MytextArea {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
 }
 
-.map-responsive iframe {
+.message-container {
+  display: flex;
+  align-items: center; /* Alinear verticalmente los elementos */
+}
 
-  left: 0;
 
-  top: 0;
+.MytextArea {
+  padding: 10px;
+  max-width: 100%;
+  margin-left: 30px;
+  line-height: 1.5;
+  box-shadow: 1px 1px 1px #999;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  margin-top:500px;
+  margin-right: 10%;
+ }
 
-  height: 100%;
 
-  width: 100%;
 
-  position: absolute;
+ .MybuttonSend{
+  margin-top:500px;
+  margin-right: 5%;
+ }
 
+.textOfMessage{
+  display: block;
+  margin-bottom: 200px;
+ 
 }

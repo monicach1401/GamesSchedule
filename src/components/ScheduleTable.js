@@ -25,6 +25,7 @@ export const ScheduleTable = () => {
     }));
     //--------------
     setData(dataConvertToArray)
+    console.log(dataConvertToArray)
   }
 
   useEffect(() => {

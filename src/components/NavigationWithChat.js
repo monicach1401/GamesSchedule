@@ -5,12 +5,17 @@ import { useUserState } from '../utilites/firebase';
 // importamos los iconos
 import HouseIcon from '@mui/icons-material/House';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import MessageIcon from '@mui/icons-material/Message';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
+export const NavigationWithChat = () => {
 
-export const Navigation = () => {
   const [user] = useUserState();
-
+  /* Función para  ir a la pantalla de MessageScreen
+  const goChatScreen = () => {
+    const path = generatePath(`/messages/:id`, { id: gameState.date })
+    console.log(path);
+    navigate(path, { id: gameState.date });
+  }*/
   return (
     <nav className="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" >
       <div className="container">
@@ -44,7 +49,14 @@ export const Navigation = () => {
                     to="/schedule"
                     style={({ isActive }) => ({ color: isActive ? 'greenyellow' : 'white' })}>
                     <SportsSoccerIcon style={{ marginRight: '5px' }} /> {/* Icono con un pequeño margen a la derecha */}
-                    Schedule screen
+                    Match schedule
+                  </NavLink>
+                </li>
+                <li className="nav-item" style={{ margin: '10px' }}>
+                  <NavLink
+                    to="/MessageScreen" style={({ isActive }) => ({ color: isActive ? 'greenyellow' : 'white' })}>
+                    <WhatsAppIcon style={{ marginRight: '5px' }} /> {/* Icono con un pequeño margen a la derecha */}
+                    Parents' chat
                   </NavLink>
                 </li>
               </>
@@ -61,3 +73,13 @@ export const Navigation = () => {
     </nav>
   );
 };
+
+/*<li className="nav-item" style={{ margin: '10px' }}>
+<div
+  onClick={goChatScreen} // Agrega el manejador de eventos aquí
+  style={{ cursor: 'pointer' }} // Cambia el cursor al pasar por encima
+>
+  <WhatsAppIcon style={{ marginRight: '5px' }} />
+  Parents' chat
+</div>
+</li>*/

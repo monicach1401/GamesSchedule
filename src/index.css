@@ -12,9 +12,9 @@ s code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 /* Home */
-.photo1
- {
+.photo1 {
   margin-top: 10%;
 }
 
@@ -23,16 +23,17 @@ s code {
 }
 
 .Mybutton {
-  background-color:green;
+  background-color: green;
   color: white;
   padding: 10px 50px;
   border: none;
   border-radius: 5px;
   margin-left: 30%;
-  font-weight:400;
-  margin-top:8%;
-  font-size: x-large;
- }
+  font-weight: 400;
+  margin-top: 8%;
+  font-size: medium;
+}
+
 
 /* TableSchedule */
 .tableSchedule {
@@ -40,12 +41,12 @@ s code {
 }
 
 /* --- Message Screen */
-.chat-message{
+.chat-message {
   flex-direction: column;
   align-items: center;
   margin-left: 10px;
- }
+}
 
- .chat{
-  margin-top:100px;
- }
+.chat {
+  margin-top: 100px;
+}

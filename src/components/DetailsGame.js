@@ -1,21 +1,35 @@
 
 import React, { useState, useEffect } from 'react';
-import { Navigation } from './Navigation';
+import { NavigationWithChat } from './NavigationWithChat';
 import { useNavigate } from 'react-router-dom';
+import { generatePath } from 'react-router-dom';
+// Importa el icono de Material-UI
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+// Importa el componente Button de Material-UI
+import Button from '@mui/material/Button';
 
 export const DetailsGame = () => {
-  //-- lo utilizaremos para vover a la página anterior
+
+  //-- Volver a la pagina anterior "Schedule"
   const navigate = useNavigate();
+
   const goBack = () => {
     navigate('/schedule');
   }
-  //---------------------------------------------------
+
+  const goChatScreen = () => {
+    const path = generatePath(`/messages/:id`, { id: gameState.date })
+    console.log(path);
+    navigate(path, { id: gameState.date });
+  }
 
 
-  // utilizamos el useState para guardar los datos de game y  la URL del mapa ya que un UseEffect no puede hacer el return
+
+  // utilizamos el useState para guardar los datos de game y  la URL del mapa ya que un UseEffect no puede hacer el returng
   const [gameState, setGameState] = useState(null);
   const [locationState, setLocationState] = useState(null);
-  
+
   useEffect(() => {
 
     // Accede al estado almacenado en localStorage
@@ -30,9 +44,12 @@ export const DetailsGame = () => {
 
   }, []);
 
+
+
+
   return (
     <>
-      <Navigation />
+      <NavigationWithChat />
       {gameState && ( // nos hace esto siempre y cuando tengamos gameState
         <div className="card" style={{ marginTop: '19%' }}>
           <div className="card-body">
@@ -51,17 +68,27 @@ export const DetailsGame = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-
           </div>
         </div>
       )}
 
-      <div>
-        {/* Elemento vacío para ocupar espacio */}
-        <div style={{ width: '10px', height: '20px' }} />
-        <button className="Mybutton"onClick={goBack}> Go Back </button>
-      </div>
 
+      <div style={{ display: 'flex', gap: '10px', marginLeft: '20px' }}>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<ArrowBackIosNewIcon />}
+          onClick={goBack}
+          className="myButtonDetailsGame"> Back
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<WhatsAppIcon />}
+          onClick={goChatScreen}
+        > Parent's Chat
+        </Button>
+      </div>
     </>
   );
 };

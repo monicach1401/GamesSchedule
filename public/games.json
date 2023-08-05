@@ -1,6 +1,6 @@
 {
     "games": {
-      "2023_09_01_01": {
+       "2023_09_01_01": {
         "date": "2023-09-01",
         "time": "9:30",
         "teams": "U1 and U4",
@@ -18,7 +18,7 @@
           "teams": "U5 and U6",
           "location_key": "Howard"
         },
-      "2023_09_08_02": {
+        "2023_09_08_02": {
           "date": "2023-09-08",
           "time": "13:00",
           "teams": "U6 and U1",
@@ -34,7 +34,7 @@
           "date": "2023_09_15",
           "time": "13:00",
           "teams": "U3 and U5",
-          "location_key": "katzenmaier"
+          "location_key": "North"
         },
         "2023_09_22_01": {
           "date": "2023_09_22",

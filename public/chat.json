@@ -1,29 +1,123 @@
 {
     "messages": {
-        "2023_09_01_01": {
+        "U1 and U4": {
             "message1": {
-                "author": "George",
+                "author": "George@gmail.com",
                 "text": "great job guarding the goal, Kevin!",
-                "timestamp": "1626713122679"
+                "timestamp": "68345713122679"
             },
             "message2": {
-                "author": "Michael",
+                "author": "Michael@gmail.com",
                 "text": "I am coming",
-                "timestamp": "2126713122679"
-            }
-        },
-        "2023_09_15_01": {
-            "message1": {
-                "author": "Kevin",
-                "text": "My son is sick!",
                 "timestamp": "16345713122679"
             }
         },
-         "2023_09_15_02": {
+        "U3 and U2": {
             "message1": {
-                "author": "Mónica",
+                "author": "Kevin@gmail.com",
+                "text": "My son is sick!",
+                "timestamp": "16345713122679"
+            },
+            "message2": {
+                "author": "Brian@gmail.com",
+                "text":  "Goodbye, see you next Saturday!",
+                "timestamp": "76545713122679"
+            }
+        },
+        "U5 and U6": {
+            "message1": {
+                "author": "Elisabeth@gmail.com",
                 "text": "I'm bringing drinks for the boys.",
+                "timestamp": "12345713122679"
+            },
+            "message2": {
+                "author": "Mary@gmail.com",
+                "text": "Good game, guys",
                 "timestamp": "23345713122679"
+            }
+        },
+        "U6 and U1": {
+            "message1": {
+                "author": "Marc@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "12345713122333"
+            },
+            "message2": {
+                "author": "Barbara@gmail.com",
+                "text": "Good game, guys",
+                "timestamp": "23345876122679"
+            }
+        },
+        "U2 and U4": {
+            "message1": {
+                "author": "Alex@gmail.com",
+                "text":  "Hello, everyone!",
+                "timestamp": "76545713122333"
+            },
+            "message2": {
+                "author": "Bob@gmail.com",
+                "text": "Good game, guys",
+                "timestamp": "786345876122679"
+            }
+        },
+        "U3 and U5": {
+            "message1": {
+                "author": "James@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "76538413122333"
+            },
+            "message2": {
+                "author": "Bea@gmail.com",
+                "text": "Goodbye, see you next Saturday!",
+                "timestamp": "75638413122333"
+            }
+        },
+        "U1 and U3": {
+            "message1": {
+                "author": "Josep@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "83438413122333"
+            },
+            "message2": {
+                "author": "Josep@gmail.com",
+                "text": "Goodbye, see you next Saturday!",
+                "timestamp": "83438413122333"
+            }
+
+        },
+        "U2 and U6": {
+            "message1": {
+                "author": "Evelyn@gmail.com",
+                "text":  "Hello, everyone!",
+                "timestamp": "87638413122333"
+            }
+        },
+        "U4 and U5": {
+            "message1": {
+                "author": "Sofia@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "87638413122333"
+            }
+        },
+        "U2 and U5": {
+            "message1": {
+                "author": "Grace@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "25638413122333"
+            }
+        },
+        "U1 and U6": {
+            "message1": {
+                "author": "Victoria@gmail.com",
+                "text": "I'm bringing drinks for the boys.",
+                "timestamp": "25546413122333"
+            }
+        },
+        "U3 and U4": {
+            "message1": {
+                "author": "Richard@gmail.com",
+                "text":  "Hello, everyone!",
+                "timestamp": "25546413122333"
             }
         }
     }

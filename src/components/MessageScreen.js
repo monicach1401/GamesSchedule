@@ -1,59 +1,101 @@
 import React, { useState, useEffect } from 'react';
-import ListOfMessages from './ListOfMessages';
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from './Navigation';
-
+// Importa el icono de Material-UI
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+// Importa el componente Button de Material-UI
+import Button from '@mui/material/Button';
 
 export const MessageScreen = () => {
 
-  //-- lo utilizaremos para vover a Home
   const navigate = useNavigate();
-  const goHome = () => {
-    navigate('/');
+
+
+  //--- función para volver Atrás
+  const goBack = () => {
+    navigate('/games/:id');
   }
 
-  // -------------   Obtenemos los datos con fetch del fichero JSON
-  const [data, setData] = useState([])
-  const showData = async () => {
-    const response = await fetch("chat.json")
-    const result = await response.json()
-    //------ convierto el Json en un array
-    const dataConvertToArray = Object.keys(result.messages).map((id) => ({
-      id,
-      messages: result.messages[id]
-    }));
-    //--------------
-    setData(dataConvertToArray)
-    console.log(dataConvertToArray)
-  }
+  // utilizamos el useState para guardar los datos de game 
+  const [gameState, setGameState] = useState(null);
+  const [chatState, setChatState] = useState(null);
+
+
   useEffect(() => {
-    showData()
-  }, [])
-  //------------------------------------------------------------------
+    // obtenemos los datos de game , con getItem del 'gameState'del localStorage
+    const gameStateFromLocalStorage = JSON.parse(localStorage.getItem('gameState'));
+    console.log('estoy en messagescreen y el Games almacenado:', gameStateFromLocalStorage);
+    setGameState(gameStateFromLocalStorage); // Guarda el estado en el estado local del componente
+
+    // obtenemos los datos de messages , con getItem del 'gameState'del localStorage
+    const chatDataFromLocalStorage = JSON.parse(localStorage.getItem('chatData'));
+    console.log('estoy en messagescreen y message almacenado:', chatDataFromLocalStorage);
+    setChatState(chatDataFromLocalStorage); // Guarda el estado en el estado local del componente
+
+  }, []);
+  //------------------------------------------------------------
+
+
   return (
     <>
       <Navigation />
       <div className="App">
         <div className="chat">
-          {data.map((messageGroup) => ( // estamos utilizando map() para iterar sobre dataConvertToArray y mostrar cada grupo de mensajes. 
-            <div key={messageGroup.id}>
-              <h2>Nuestro ID- fecha de partido: {messageGroup.id}</h2>
-              {Object.values(messageGroup.messages).map((message) => (//Luego, dentro de cada grupo, utilizamos otro map() para mostrar cada mensaje individual con su autor, texto y marca de tiempo.
-                <div key={message.timestamp}>
-                  <p>Author: {message.author}</p>
-                  <p>Text: {message.text}</p>
-                  <p>Timestamp: {message.timestamp}</p>
-                  <p>-------------------------------</p>
-                </div>
-              ))}
-            </div>
-          ))}
+          <div className="chat">
+            {/* pongo .filter() para asegurarme de que solo mapeemos los mensajes correspondientes al equipo actual. 
+          Luego, he usado .sort() en el mapeo de mensajes para ordenarlos por su timestamp en orden ascendente. */}
+            {chatState &&
+              chatState
+                .filter(messageGroup => gameState.teams === messageGroup.id)
+                .map(messageGroup => (
+                  <div key={messageGroup.id}>
+                    <h5>Messages of Teams: {messageGroup.id}</h5>
+                    <p>Date: {gameState.date}</p>
+                    {Object.values(messageGroup.messages)
+                      .sort((a, b) => a.timestamp - b.timestamp) // Ordenar por timestamp
+                      .map(message => (
+                        <div key={message.timestamp}>
+                          <strong>{message.author}:</strong> {message.text}
+                          <p>Timestamp: {message.timestamp}</p>
+                          <p>____________________________</p>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+          </div>
         </div>
       </div>
-      <div>
-        <button className="Mybutton" onClick={goHome}> Go Home </button>
+      <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<ArrowBackIosNewIcon />}
+          onClick={goBack}
+          className="myButtonDetailsGame"> Back
+        </Button>
       </div>
     </>
   );
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

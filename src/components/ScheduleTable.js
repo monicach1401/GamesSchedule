@@ -18,7 +18,6 @@ export const ScheduleTable = () => {
     console.log('Fila seleccionada:', row);
     // Genera la ruta con el parámetro row.id
     const path = generatePath(`/games/:id`, { id: row.id });
-    console.log('estoy en schedule table  y el path es :', path)
     // Guarda el estado en localStorage
     localStorage.setItem('gameState', JSON.stringify(row.games));// Guarda los datos de games
     localStorage.setItem('locationState', JSON.stringify(row.locations)); // Guarda los datos de locations
@@ -116,7 +115,7 @@ export const ScheduleTable = () => {
           variant="contained"
           color="success"
           startIcon={<ArrowBackIosNewIcon />}
-          onClick={goBack}> Go Back
+          onClick={goBack}> 
         </Button>
     </>
   )

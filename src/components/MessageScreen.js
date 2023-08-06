@@ -71,7 +71,7 @@ export const MessageScreen = () => {
           color="success"
           startIcon={<ArrowBackIosNewIcon />}
           onClick={goBack}
-          className="myButtonDetailsGame"> Back
+          className="myButtonDetailsGame"> 
         </Button>
       </div>
     </>

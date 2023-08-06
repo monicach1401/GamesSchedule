@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { NavigationWithChat } from './NavigationWithChat';
+import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 // Importa el icono de Material-UI
@@ -49,7 +49,7 @@ export const DetailsGame = () => {
 
   return (
     <>
-      <NavigationWithChat />
+      <Navigation />
       {gameState && ( // nos hace esto siempre y cuando tengamos gameState
         <div className="card" style={{ marginTop: '19%' }}>
           <div className="card-body">
@@ -79,7 +79,7 @@ export const DetailsGame = () => {
           color="success"
           startIcon={<ArrowBackIosNewIcon />}
           onClick={goBack}
-          className="myButtonDetailsGame"> Back
+          className="myButtonDetailsGame">
         </Button>
         <Button
           variant="contained"

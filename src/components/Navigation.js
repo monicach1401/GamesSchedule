@@ -60,7 +60,7 @@ export const Navigation = () => {
                     Match schedule
                   </NavLink>
                 </li>
-                {/* Condición para mostrar el enlace solo si estamos en /games, como mi path es'/games/2023_09_01_01'. utilizo el includes */}
+                {/* Condición para mostrar el enlace solo si estamos en /games, como mi path es'/games/2023_09_01_01'. utilizo el includes 
                 {location.pathname.includes('/games') && (  
                   <li className="nav-item" style={{ margin: '10px' }}>
                     <NavLink
@@ -71,7 +71,7 @@ export const Navigation = () => {
                       Parents' chat
                     </NavLink>
                   </li>
-                )}
+                )}*/}
               </>
             )}
           </ul>

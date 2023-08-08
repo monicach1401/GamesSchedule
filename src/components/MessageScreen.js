@@ -1,6 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from './Navigation';
+import { DatabaseValue } from '../utilites/firebase';
+
+import { useLocation } from 'react-router-dom';
+import { WriteNewMessages } from '../components/WriteNewMessages';
+
+
 // Importa el icono de Material-UI
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 // Importa el componente Button de Material-UI
@@ -9,61 +16,46 @@ import Button from '@mui/material/Button';
 export const MessageScreen = () => {
 
   const navigate = useNavigate();
-
-
   //--- función para volver Atrás
   const goBack = () => {
     navigate('/games/:id');
   }
+  // a través de location obtenemos el id
+  const location = useLocation();
+  // Extrae el valor del parámetro 'id' de la ruta
+  const idFromPath = location.pathname.split('/').pop();
+  console.log(' estoy en messagescreen y mi location es :', location)
+  console.log('Estoy en messagescreen y mi id es:', idFromPath)
 
-  // utilizamos el useState para guardar los datos de game 
-  const [gameState, setGameState] = useState(null);
-  const [chatState, setChatState] = useState(null);
+  /*---obtenemos los datos de la base de datos de FIREBASE del chat.json ---------------------*/
+  const dataMessages = DatabaseValue('/'); // poniendo '/' me coge toda la base de datos
+  if (dataMessages === null) {
+    return <h1>Loading the messages ...</h1>;
+  }
+
+  console.log('dataMessages es :', dataMessages)
+
+  /*if (!dataMessages.messages[idFromPath]) {
+    return <h1>No messages found for {idFromPath}</h1>;
+  }*/
 
 
-  useEffect(() => {
-    // obtenemos los datos de game , con getItem del 'gameState'del localStorage
-    const gameStateFromLocalStorage = JSON.parse(localStorage.getItem('gameState'));
-    console.log('estoy en messagescreen y el Games almacenado:', gameStateFromLocalStorage);
-    setGameState(gameStateFromLocalStorage); // Guarda el estado en el estado local del componente
-
-    // obtenemos los datos de messages , con getItem del 'gameState'del localStorage
-    const chatDataFromLocalStorage = JSON.parse(localStorage.getItem('chatData'));
-    console.log('estoy en messagescreen y message almacenado:', chatDataFromLocalStorage);
-    setChatState(chatDataFromLocalStorage); // Guarda el estado en el estado local del componente
-
-  }, []);
-  //------------------------------------------------------------
-
+  const messagesData  = dataMessages.messages[idFromPath];
 
   return (
     <>
       <Navigation />
-      <div className="App">
-        <div className="chat">
-          <div className="chat">
-            {/* pongo .filter() para asegurarme de que solo mapeemos los mensajes correspondientes al equipo actual. 
-          Luego, he usado .sort() en el mapeo de mensajes para ordenarlos por su timestamp en orden ascendente. */}
-            {chatState &&
-              chatState
-                .filter(messageGroup => gameState.teams === messageGroup.id)
-                .map(messageGroup => (
-                  <div key={messageGroup.id}>
-                    <h5>Messages of Teams: {messageGroup.id}</h5>
-                    <p>Date: {gameState.date}</p>
-                    {Object.values(messageGroup.messages)
-                      .sort((a, b) => a.timestamp - b.timestamp) // Ordenar por timestamp
-                      .map(message => (
-                        <div key={message.timestamp}>
-                          <strong>{message.author}:</strong> {message.text}
-                          <p>Timestamp: {message.timestamp}</p>
-                          <p>____________________________</p>
-                        </div>
-                      ))}
-                  </div>
-                ))}
-          </div>
-        </div>
+      <div style={{ marginLeft: '20px', marginTop: '90px' }}>
+        <h3>Messages for id: {idFromPath}</h3>
+        <ul>
+          {Object.keys(messagesData).map((messageKey, index) => (
+            <li key={index}>
+              <p>Author: {messagesData[messageKey].author}</p>
+              <p>Text: {messagesData[messageKey].text}</p>
+              <p>Timestamp: {messagesData[messageKey].timestamp}</p>
+            </li>
+          ))}
+        </ul>
       </div>
       <div style={{ marginLeft: '20px', marginTop: '20px' }}>
         <Button
@@ -71,13 +63,12 @@ export const MessageScreen = () => {
           color="success"
           startIcon={<ArrowBackIosNewIcon />}
           onClick={goBack}
-          className="myButtonDetailsGame"> 
+          className="myButtonDetailsGame">
         </Button>
       </div>
     </>
   );
 }
-
 
 
 

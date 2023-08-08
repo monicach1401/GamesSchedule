@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // Importa el icono de Material-UI
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 // Importa el componente Button de Material-UI
 import Button from '@mui/material/Button';
+
 
 export const DetailsGame = () => {
 
@@ -18,11 +20,18 @@ export const DetailsGame = () => {
     navigate('/schedule');
   }
 
+  const location = useLocation();
+  // Extrae el valor del parámetro 'id' de la ruta
+  const idFromPath = location.pathname.split('/').pop();
+
   const goChatScreen = () => {
-    const path = generatePath(`/messages/:id`, { id: gameState.date })
-    console.log(path);
-    navigate(path, { id: gameState.date });
+
+    const path = generatePath(`/messages/:id`, { id: idFromPath })
+    console.log('ahora estoy en MessageScreen y el id para buscar es', idFromPath)
+    //navigate(path, { id: gameState.date });
+    navigate(path, { id: idFromPath });
   }
+
 
 
 
@@ -73,7 +82,7 @@ export const DetailsGame = () => {
       )}
 
 
-      <div style={{ display: 'flex', gap: '10px', marginLeft: '20px' }}>
+      <div style={{ display: 'flex', gap: '10px', marginLeft: '20px', marginTop: '10px' }}>
         <Button
           variant="contained"
           color="success"

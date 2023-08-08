@@ -3,9 +3,9 @@ import DataTable from 'react-data-table-component';
 import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
+
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';// Importa el icono de Material-UI
 import Button from '@mui/material/Button'; // Importa el componente Button de Material-UI
-
 
 export const ScheduleTable = () => {
 
@@ -13,15 +13,22 @@ export const ScheduleTable = () => {
   const navigate = useNavigate();
   const goBack = () => navigate('/');
 
-  // función que nos guarda los datos de la fila para pasarlos al componente DetailsGame
+  //------------- función que nos guarda los datos de la fila para pasarlos al componente DetailsGame
   const goDetailsGame = (row) => {
     console.log('Fila seleccionada:', row);
-    // Genera la ruta con el parámetro row.id
+
+    // Genera la ruta con el parámetro row.id para mostrar justo los datos de ese id 
     const path = generatePath(`/games/:id`, { id: row.id });
+
+    // Extrae el valor del parámetro 'id' de la ruta para despues utilizarlo en el componente MessageScrenn
+
+
+    const idFromPath = path.split('/').pop();
+    console.log('mi id for messagescreen es:', path)
+
     // Guarda el estado en localStorage
     localStorage.setItem('gameState', JSON.stringify(row.games));// Guarda los datos de games
     localStorage.setItem('locationState', JSON.stringify(row.locations)); // Guarda los datos de locations
-    localStorage.setItem('chatData', JSON.stringify(chat)); // Guarda los datos de locations
 
     // Redirige a la página DetailsGame
     window.location.href = path;
@@ -51,32 +58,7 @@ export const ScheduleTable = () => {
   useEffect(() => {
     showData()
   }, [])
-  //--------------------------------------------------------------------
 
-  // -------------   Obtenemos los datos con fetch del fichero CHAT.JSON
-  const [chat, setChat] = useState([])
-  const fetchChatData = async () => {
-    try {
-      const response = await fetch("chat.json")
-      const result = await response.json()
-      //------ convierto el Json en un array
-      const chatConvertToArray = Object.keys(result.messages).map((id) => ({
-        id,
-        messages: result.messages[id]
-      }));
-      //--------------
-      setChat(chatConvertToArray)
-      console.log('el fetch chat.json es:', chatConvertToArray)
-    }
-    catch (error) {
-      console.error('Error fetching chat data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchChatData()
-  }, [])
-  //------------------------------------------------------------------
   //-----------------3- configuramos columnas
   const columns = [
     {
@@ -112,11 +94,12 @@ export const ScheduleTable = () => {
         onRowClicked={goDetailsGame} // al hacer click en una fila mostramos DetailsGame
       />
       <Button
-          variant="contained"
-          color="success"
-          startIcon={<ArrowBackIosNewIcon />}
-          onClick={goBack}> 
-        </Button>
+        variant="contained"
+        color="success"
+        startIcon={<ArrowBackIosNewIcon />}
+        onClick={goBack}>
+      </Button>
     </>
   )
 }
+

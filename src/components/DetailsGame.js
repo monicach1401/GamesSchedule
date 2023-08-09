@@ -4,6 +4,7 @@ import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { DatabaseList } from '../utilites/firebase';
 // Importa el icono de Material-UI
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -20,30 +21,40 @@ export const DetailsGame = () => {
     navigate('/schedule');
   }
 
+  /* a través de location obtenemos el id*/
   const location = useLocation();
   // Extrae el valor del parámetro 'id' de la ruta
   const idFromPath = location.pathname.split('/').pop();
+  console.log(' estoy en detailsgame y mi location es :', location)
+  console.log('Estoy en detailsgame y mi id es:', idFromPath)
 
+
+
+  /* -------Función para ir a MessageScreen--------------------------*/
   const goChatScreen = () => {
-
     const path = generatePath(`/messages/:id`, { id: idFromPath })
-    console.log('ahora estoy en MessageScreen y el id para buscar es', idFromPath)
-    //navigate(path, { id: gameState.date });
     navigate(path, { id: idFromPath });
   }
 
+  /* -----------------buscamos los datos con el hook useList y lo guardamos en localstorage*/
+  const snapshots = DatabaseList('/');
+  const data = snapshots.map(snapshot => snapshot.val());
+  // Guardamos snapshots en el localStorage 
+  console.log('useList nos devuelve:', data)
+  console.log(data[0])
+  localStorage.setItem('snapshots', JSON.stringify(data[0]));
 
 
-
-  // utilizamos el useState para guardar los datos de game y  la URL del mapa ya que un UseEffect no puede hacer el returng
+  /* ----- Utilizamos el localStorage para extraer los datos de game que hemos seleccionado----------------------------*/
   const [gameState, setGameState] = useState(null);
   const [locationState, setLocationState] = useState(null);
 
   useEffect(() => {
-
+   
     // Accede al estado almacenado en localStorage
     const gameStateFromLocalStorage = JSON.parse(localStorage.getItem('gameState'));
     const locationStateFromLocalStorage = JSON.parse(localStorage.getItem('locationState'));
+
     console.log('Games almacenado:', gameStateFromLocalStorage);
     console.log('Locations almacenado:', locationStateFromLocalStorage);
 
@@ -52,9 +63,7 @@ export const DetailsGame = () => {
     setLocationState(locationStateFromLocalStorage);
 
   }, []);
-
-
-
+  /*-----------------------------------------------------------------------------------------------------------------*/
 
   return (
     <>

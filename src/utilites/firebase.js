@@ -55,15 +55,24 @@ export const DatabaseValue = (value) => {
 
 export const DatabaseList = (value) => {
   const [snapshots, loading, error] = useList(ref(database, value));
-
+  
   if (error) {
     console.error(error);
+    return [];
   }
+  
   if (loading) {
     console.log('Loading data...');
+    return [];
   }
-
-  if (snapshots) {
+  
+ /* if (snapshots) {
+    const data = snapshots.map(snapshot => snapshot.val());
+    return data;
+  }*/
+ if (snapshots) {
+  
     return snapshots;
   }
-}
+  
+};

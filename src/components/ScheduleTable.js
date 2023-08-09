@@ -16,20 +16,11 @@ export const ScheduleTable = () => {
   //------------- función que nos guarda los datos de la fila para pasarlos al componente DetailsGame
   const goDetailsGame = (row) => {
     console.log('Fila seleccionada:', row);
-
     // Genera la ruta con el parámetro row.id para mostrar justo los datos de ese id 
     const path = generatePath(`/games/:id`, { id: row.id });
-
-    // Extrae el valor del parámetro 'id' de la ruta para despues utilizarlo en el componente MessageScrenn
-
-
-    const idFromPath = path.split('/').pop();
-    console.log('mi id for messagescreen es:', path)
-
     // Guarda el estado en localStorage
     localStorage.setItem('gameState', JSON.stringify(row.games));// Guarda los datos de games
     localStorage.setItem('locationState', JSON.stringify(row.locations)); // Guarda los datos de locations
-
     // Redirige a la página DetailsGame
     window.location.href = path;
   };
@@ -41,6 +32,7 @@ export const ScheduleTable = () => {
     try {
       const response = await fetch("games.json")
       const result = await response.json()
+      console.log('este el el games del json',result)
       //------ convierto el Json en un array
       const dataConvertToArray = Object.keys(result.games).map((id) => ({
         id,
@@ -49,7 +41,7 @@ export const ScheduleTable = () => {
       }));
       //--------------
       setData(dataConvertToArray)
-      console.log(dataConvertToArray)
+      console.log('despues de convertirlo',dataConvertToArray)
     } catch (error) {
       console.error('Error fetching game data:', error);
     }
@@ -58,6 +50,8 @@ export const ScheduleTable = () => {
   useEffect(() => {
     showData()
   }, [])
+
+  
 
   //-----------------3- configuramos columnas
   const columns = [

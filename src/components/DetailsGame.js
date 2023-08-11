@@ -4,7 +4,6 @@ import { Navigation } from './Navigation';
 import { useNavigate } from 'react-router-dom';
 import { generatePath } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { DatabaseList } from '../utilites/firebase';
 // Importa el icono de Material-UI
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -25,10 +24,7 @@ export const DetailsGame = () => {
   const location = useLocation();
   // Extrae el valor del parámetro 'id' de la ruta
   const idFromPath = location.pathname.split('/').pop();
-  console.log(' estoy en detailsgame y mi location es :', location)
-  console.log('Estoy en detailsgame y mi id es:', idFromPath)
-
-
+  
 
   /* -------Función para ir a MessageScreen--------------------------*/
   const goChatScreen = () => {
@@ -36,14 +32,7 @@ export const DetailsGame = () => {
     navigate(path, { id: idFromPath });
   }
 
-  /* -----------------buscamos los datos con el hook useList y lo guardamos en localstorage*/
-  const snapshots = DatabaseList('/');
-  const data = snapshots.map(snapshot => snapshot.val());
-  // Guardamos snapshots en el localStorage 
-  console.log('useList nos devuelve:', data)
-  console.log(data[0])
-  localStorage.setItem('snapshots', JSON.stringify(data[0]));
-
+ 
 
   /* ----- Utilizamos el localStorage para extraer los datos de game que hemos seleccionado----------------------------*/
   const [gameState, setGameState] = useState(null);

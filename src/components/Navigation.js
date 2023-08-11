@@ -5,7 +5,7 @@ import { useUserState } from '../utilites/firebase';
 // importamos los iconos
 import HouseIcon from '@mui/icons-material/House';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+
 
 
 
@@ -15,7 +15,7 @@ export const Navigation = () => {
 
   /* con location puedo saber donde estoy en todo momento */
   const location = useLocation();
-  console.log('ahora mi location es:', location)
+  
   /* en la variable pathname, sé en todo momento cual es mi ruta */
   const isActiveRoute = (route) => {
     return location.pathname === route;

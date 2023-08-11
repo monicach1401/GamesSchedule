@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, push } from 'firebase/database';
 import 'firebase/database';
+import 'firebase/storage';
 import { useObject } from 'react-firebase-hooks/database';
 import { useList } from 'react-firebase-hooks/database';
 
@@ -35,7 +36,8 @@ export const useUserState = () => useAuthState(getAuth(firebase));
 /* incializamos la variable de database */
 const database = getDatabase(firebase);
 
-/* useObject nos devuelve un array con 3 valores
+
+/* esta función obtiene los datos de la base de datos utilizando el Hook- UseObject
 snapshot, loading, error y en snapshot es donde guardaremos nuestros datos*/
 
 export const DatabaseValue = (value) => {
@@ -52,27 +54,34 @@ export const DatabaseValue = (value) => {
   }
   return null;
 };
-
+// esta función obtiene los datos de la base de datos utilizando el Hook- UseList
 export const DatabaseList = (value) => {
   const [snapshots, loading, error] = useList(ref(database, value));
-  
   if (error) {
     console.error(error);
     return [];
   }
-  
   if (loading) {
     console.log('Loading data...');
     return [];
   }
-  
- /* if (snapshots) {
-    const data = snapshots.map(snapshot => snapshot.val());
-    return data;
-  }*/
- if (snapshots) {
-  
+  if (snapshots) {
     return snapshots;
   }
-  
 };
+
+/* esta función guarda un valor en la base de datos de Firebase en la ubicación que esté referenciada 
+ por la ruta (path).*/
+
+/*export const setData = (path, value) => {
+  console.log ('estoy en la funcion setData y el path es:',path);
+  console.log ('estoy en la funcion setData y value es:',value);
+  set(ref(database, path), value);
+};*/
+
+export const pushData = (path, value) => {
+  push(ref(database, path), value);
+};
+
+// función para storage de Firebase
+export const storage = firebase.storage;

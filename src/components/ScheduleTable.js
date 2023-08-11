@@ -19,6 +19,7 @@ export const ScheduleTable = () => {
     // Genera la ruta con el parámetro row.id para mostrar justo los datos de ese id 
     const path = generatePath(`/games/:id`, { id: row.id });
     // Guarda el estado en localStorage
+
     localStorage.setItem('gameState', JSON.stringify(row.games));// Guarda los datos de games
     localStorage.setItem('locationState', JSON.stringify(row.locations)); // Guarda los datos de locations
     // Redirige a la página DetailsGame
@@ -32,7 +33,7 @@ export const ScheduleTable = () => {
     try {
       const response = await fetch("games.json")
       const result = await response.json()
-      console.log('este el el games del json',result)
+      console.log('este el el games del json', result)
       //------ convierto el Json en un array
       const dataConvertToArray = Object.keys(result.games).map((id) => ({
         id,
@@ -41,7 +42,6 @@ export const ScheduleTable = () => {
       }));
       //--------------
       setData(dataConvertToArray)
-      console.log('despues de convertirlo',dataConvertToArray)
     } catch (error) {
       console.error('Error fetching game data:', error);
     }
@@ -51,7 +51,7 @@ export const ScheduleTable = () => {
     showData()
   }, [])
 
-  
+
 
   //-----------------3- configuramos columnas
   const columns = [

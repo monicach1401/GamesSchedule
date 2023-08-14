@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 // Importa el icono de Material-UI
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 // Importa el componente Button de Material-UI
 import Button from '@mui/material/Button';
 
@@ -24,7 +25,7 @@ export const DetailsGame = () => {
   const location = useLocation();
   // Extrae el valor del parámetro 'id' de la ruta
   const idFromPath = location.pathname.split('/').pop();
-  
+
 
   /* -------Función para ir a MessageScreen--------------------------*/
   const goChatScreen = () => {
@@ -32,20 +33,23 @@ export const DetailsGame = () => {
     navigate(path, { id: idFromPath });
   }
 
- 
+  /* -------Función para ir a PhotosScreen--------------------------*/
+  const goPhotosScreen = () => {
+    const path = generatePath(`/photos/:id`, { id: idFromPath })
+    navigate(path, { id: idFromPath });
+  }
+
+
 
   /* ----- Utilizamos el localStorage para extraer los datos de game que hemos seleccionado----------------------------*/
   const [gameState, setGameState] = useState(null);
   const [locationState, setLocationState] = useState(null);
 
   useEffect(() => {
-   
+
     // Accede al estado almacenado en localStorage
     const gameStateFromLocalStorage = JSON.parse(localStorage.getItem('gameState'));
     const locationStateFromLocalStorage = JSON.parse(localStorage.getItem('locationState'));
-
-    console.log('Games almacenado:', gameStateFromLocalStorage);
-    console.log('Locations almacenado:', locationStateFromLocalStorage);
 
     // Guarda el estado en el estado local del componente
     setGameState(gameStateFromLocalStorage);
@@ -57,6 +61,7 @@ export const DetailsGame = () => {
   return (
     <>
       <Navigation />
+
       {gameState && ( // nos hace esto siempre y cuando tengamos gameState
         <div className="card" style={{ marginTop: '19%' }}>
           <div className="card-body">
@@ -80,22 +85,30 @@ export const DetailsGame = () => {
       )}
 
 
-      <div style={{ display: 'flex', gap: '10px', marginLeft: '20px', marginTop: '10px' }}>
+      <div style={{ display: 'flex', gap: '20px', marginLeft: '20px', marginTop: '10px' }}>
         <Button
           variant="contained"
           color="success"
           startIcon={<ArrowBackIosNewIcon />}
           onClick={goBack}
-          className="myButtonDetailsGame">
+        >
         </Button>
         <Button
           variant="contained"
           color="success"
           startIcon={<WhatsAppIcon />}
           onClick={goChatScreen}
-        > Parent's Chat
+        > Chat
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<AddAPhotoIcon />}
+          onClick={goPhotosScreen}
+        > Photos
         </Button>
       </div>
+
     </>
   );
 };

@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getDatabase, ref, push } from 'firebase/database';
 import 'firebase/database';
 import 'firebase/storage';
+import { getStorage, uploadBytes } from "firebase/storage";
 import { useObject } from 'react-firebase-hooks/database';
 import { useList } from 'react-firebase-hooks/database';
 
@@ -13,7 +14,7 @@ const firebaseConfig = {
   authDomain: "gamesschedule-6b172.firebaseapp.com",
   databaseURL: "https://gamesschedule-6b172-default-rtdb.firebaseio.com",
   projectId: "gamesschedule-6b172",
-  storageBucket: "gamesschedule-6b172.appspot.com",
+  storageBucket: "gs://gamesschedule-6b172.appspot.com",
   messagingSenderId: "265000773032",
   appId: "1:265000773032:web:63e1c84a96c54bb64e299d",
   measurementId: "G-D79CHWT04C"
@@ -33,9 +34,8 @@ export { firebaseSignOut as signOut };
 export const useUserState = () => useAuthState(getAuth(firebase));
 
 
-/* incializamos la variable de database */
+/* incializamos la variable de DATABASE */
 const database = getDatabase(firebase);
-
 
 /* esta función obtiene los datos de la base de datos utilizando el Hook- UseObject
 snapshot, loading, error y en snapshot es donde guardaremos nuestros datos*/
@@ -73,15 +73,19 @@ export const DatabaseList = (value) => {
 /* esta función guarda un valor en la base de datos de Firebase en la ubicación que esté referenciada 
  por la ruta (path).*/
 
-/*export const setData = (path, value) => {
-  console.log ('estoy en la funcion setData y el path es:',path);
-  console.log ('estoy en la funcion setData y value es:',value);
-  set(ref(database, path), value);
-};*/
 
 export const pushData = (path, value) => {
   push(ref(database, path), value);
 };
 
-// función para storage de Firebase
-export const storage = firebase.storage;
+// segun PLATAFORM
+// export const storage = firebase.storage;
+
+// segun Documentación Firebase
+export const storage = getStorage(firebase);
+
+
+
+
+
+

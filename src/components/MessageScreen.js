@@ -9,9 +9,6 @@ import { WriteNewMessages } from '../components/WriteNewMessages';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';// Importa el icono de Material-UI
 import Button from '@mui/material/Button';// Importa el componente Button de Material-UI
 
-
-
-
 export const MessageScreen = () => {
 
   const location = useLocation();

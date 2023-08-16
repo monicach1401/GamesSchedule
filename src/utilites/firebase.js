@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getDatabase, ref, push } from 'firebase/database';
 import 'firebase/database';
 import 'firebase/storage';
-import { getStorage, uploadBytes } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import { useObject } from 'react-firebase-hooks/database';
 import { useList } from 'react-firebase-hooks/database';
 
@@ -54,6 +54,7 @@ export const DatabaseValue = (value) => {
   }
   return null;
 };
+
 // esta función obtiene los datos de la base de datos utilizando el Hook- UseList
 export const DatabaseList = (value) => {
   const [snapshots, loading, error] = useList(ref(database, value));

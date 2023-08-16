@@ -24,7 +24,7 @@ export const MessageScreen = () => {
     navigate(path, { id: idFromPath });
   }
 
-  // -------------   Obtenemos los datos DataList de la basae de datos de Firebase
+  // -------------   Obtenemos los datos de messages
   const pathMessages = location.pathname; // buscamos solo los datos del id que encontramos en el path,/messages/2023_09_01_01
   const data = DatabaseList(pathMessages);
   const snapshots = data.map(snapshot => snapshot.val());

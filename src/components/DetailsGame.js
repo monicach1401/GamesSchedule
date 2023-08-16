@@ -54,8 +54,8 @@ export const DetailsGame = () => {
     // Guarda el estado en el estado local del componente
     setGameState(gameStateFromLocalStorage);
     setLocationState(locationStateFromLocalStorage);
-
   }, []);
+  
   /*-----------------------------------------------------------------------------------------------------------------*/
 
   return (

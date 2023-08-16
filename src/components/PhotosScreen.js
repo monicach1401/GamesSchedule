@@ -108,7 +108,7 @@ export const PhotosScreen = () => {
           });
         setFile(null);
         setButtonPostDisable(true);
-        alert ('Successfully stored photo !!')
+        alert('Successfully stored photo !!')
       })
       .catch(error => {
         console.log('Error while uploading the file:', error);
@@ -148,18 +148,31 @@ export const PhotosScreen = () => {
         > Upload
         </Button>
       </div>
-      <div style={{ marginLeft: '20px', marginTop: '20px' }}>
+      <div style={{ marginTop: '20px', marginRight: '20px' }}>
         <ul>
           {snapshots.map((snapshot, index) => (
             <li key={index}>
-              <div>Author: {snapshot.author}</div>
-              <div>Timestamp: {formatTimestamp(snapshot.timestamp)}</div>
-              <div>
-                <img src={snapshot.url} alt="" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+              <div className="card " style={{ backgroundColor: 'beige', border: '1px solid black' }}>
+                <img src={snapshot.url} alt="..." style={{ maxWidth: '100%', maxHeight: '300px' }}></img>
+                <div className="card-body">
+                  <p className="card-text"> Author: {snapshot.author} </p>
+                  <p className="card-text"> Timestamp: {formatTimestamp(snapshot.timestamp)} </p>
+                </div>
               </div>
+              <p></p>
             </li>
           ))}
         </ul>
+
+
+
+
+
+
+
+
+
+
       </div>
       <div style={{ marginLeft: '20px', marginTop: '20px' }}>
         <Button

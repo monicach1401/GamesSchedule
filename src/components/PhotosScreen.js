@@ -149,7 +149,7 @@ export const PhotosScreen = () => {
         </Button>
       </div>
       <div style={{ marginTop: '20px', marginRight: '20px' }}>
-        <ul>
+        <ul className='listPhotos'>
           {snapshots.map((snapshot, index) => (
             <li key={index}>
               <div className="card " style={{ backgroundColor: 'beige', border: '1px solid black' }}>
